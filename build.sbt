@@ -86,12 +86,14 @@ val reactJsVersion = "15.5.4"
 val jsDeps = Seq(
   jsDependencies += RuntimeDOM,
 
-  scalaJSModuleKind := ModuleKind.CommonJSModule,
+  //scalaJSModuleKind := ModuleKind.CommonJSModule,
   npmDependencies in Compile += "semantic-ui-react" -> semanticUiVersion,
 
-  jsDependencies += ("org.webjars.npm" % "semantic-ui-react" % semanticUiReactVersion / "dist/commonjs/index.js")
-    .minified("dist/umd/semantic-ui-react.min.js"),
-    //.commonJSName("aa"),
+
+  //jsDependencies += ("org.webjars.npm" % "semantic-ui-react" % semanticUiReactVersion / "dist/commonjs/index.js")
+  //  .minified("dist/umd/semantic-ui-react.min.js"),
+  //.commonJSName("SematicUI"),
+
 
   jsDependencies += ("org.webjars.bower" % "react" % reactJsVersion / "react-with-addons.js")
     .minified("react-with-addons.min.js")
@@ -107,6 +109,7 @@ lazy val library = (project in file("./modules/library"))
   .enablePlugins(ScalaJSPlugin, ScalaJSBundlerPlugin)
   .settings(commonSettings)
   .settings(
+    scalaJSUseMainModuleInitializer := false,
     libraryDependencies += "com.github.japgolly.scalajs-react" %%% "core" % reactVersion,
     jsDeps
   )
